@@ -47,13 +47,11 @@ var displayItems = function() {
                     name: "selectItem",
                     type: "input",
                     message: "What would you like to buy? Please enter Item ID",
-                    filter: Number //only accepts numbers as an input
                 },
                 {
                     name: "amount",
                     type: "input",
                     message: "How many would you like to buy?",
-                    filter: Number //only allows numbers as an input
                 }
             ]).then(function(answers) {
                 var selectedID = answers.selectItem;
@@ -61,3 +59,18 @@ var displayItems = function() {
                 purchaseItem(selectedID, amountNeeded);
             });
     };
+
+    //function that will let customer purchase items depending if there are enough in stock
+    function purchaseItem(selectedID, amountNeeded) {
+        connection.query('SELECT * FROM bamazon.products WHERE item_id = ' + selectedID, function(err, res) {
+            if(err) {
+                console.log("Error. Someting whent wrong. Please reset application");
+            }
+            else if (amountNeeded <= res[0].stock_quantity) {
+                var totalAmount = res[0].price * amountNeeded;
+                console.log(`Gongrats! You are now the proud owner of a ${res[0].product_name}!\n`)
+                console.log(`Product: ${res[0].product_name}\nQuantity: ${amountNeeded}\nTotal Amount: $${totalAmount}\n\nThank you for choosing Bamazon!\nWe are not ripping off Amazon!\n`);
+                connection.end();
+            }
+        })
+    }

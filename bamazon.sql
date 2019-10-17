@@ -27,3 +27,18 @@ VALUES ("Batman Comics", "Books & Comics", "3.99", 20);
 
 INSERT INTO bamazon.products (product_name, department_name, price, stock_quantity)
 VALUES ("50 Shades of John McCain", "Books & Comics", "20", 4);
+
+INSERT INTO bamazon.products (product_name, department_name, price, stock_quantity)
+VALUES ("Disney On Ice", "Random Pile of Junk", "4.99", 800);
+
+INSERT INTO bamazon.products (product_name, department_name, price, stock_quantity)
+VALUES ("Tony Hawk Pro Skater 5", "Video Games", 59.99, 12);
+
+INSERT INTO bamazon.products (product_name, department_name, price, stock_quantity)
+VALUES ("Death Star", "Canned Goods", 3000, 2);
+
+INSERT INTO bamazon.products (product_name, department_name, price, stock_quantity)
+VALUES ("Death Note", "Books & Comics", 10, 2);
+
+INSERT INTO bamazon.products (product_name, department_name, price, stock_quantity)
+VALUES ("Teen Titans", "Books & Comics", 3.99, 30);

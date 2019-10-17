@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
 // connecting to mysql server and database
 connection.connect(function(err) {
     if (err) throw err;
-    console.log("\nConnected. \nConnection ID " + connection.threadId + ". \n\nWelcome to Bamazon!\n\n")
+    console.log("\nConnected. \nConnection ID " + connection.threadId + ". \n\nWelcome to Bamazon!")
 });
 
 //function which displays product via table node
@@ -70,7 +70,12 @@ var displayItems = function() {
                 var totalAmount = res[0].price * amountNeeded;
                 console.log(`Gongrats! You are now the proud owner of a ${res[0].product_name}!\n`)
                 console.log(`Product: ${res[0].product_name}\nQuantity: ${amountNeeded}\nTotal Amount: $${totalAmount}\n\nThank you for choosing Bamazon!\nWe are not ripping off Amazon!\n`);
-                connection.end();
+                connection.query("UPDATE bamazon.products SET stock_quantity = stock_quantity - " + amountNeeded + " WHERE item_id = " + selectedID);
+                displayItems();
             }
-        })
-    }
+            else {
+                console.log(`\nUh Oh, we don't seem to have enough ${res[0].product_name} in stock. Please try again!\n`);
+                selectItem();
+            };
+        });
+    };
